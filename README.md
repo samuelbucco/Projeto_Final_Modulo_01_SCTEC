@@ -1,6 +1,6 @@
 # Projeto Final - Análise de Dados de Recursos Humanos
 
-Projeto avaliativo do Módulo 1 do curso de Análise de Dados do SCTEC.
+Projeto avaliativo do Módulo 1 do curso de Análise de Dados do SCTEC, desenvolvido com foco em consultas SQL, análise exploratória de dados e visualização de informações de Recursos Humanos.
 
 ## Identificação
 
@@ -12,60 +12,118 @@ Projeto avaliativo do Módulo 1 do curso de Análise de Dados do SCTEC.
 
 ## Objetivo
 
-Analisar dados de Recursos Humanos para compreender a distribuição dos salários, a relação entre cargos e departamentos e os padrões de remuneração por região.
+Analisar dados de Recursos Humanos a partir do esquema **HR (Human Resources)** do FreeSQL, buscando compreender a distribuição dos salários, a relação entre cargos e departamentos e os padrões de remuneração por localização geográfica.
 
-Os dados serão consultados no esquema **HR (Human Resources)** do banco FreeSQL. Os resultados das consultas SQL serão exportados para arquivos CSV e analisados em Python por meio de estatísticas descritivas e visualizações.
+O projeto foi desenvolvido em duas etapas principais:
+
+1. extração dos dados por meio de consultas SQL no FreeSQL;
+2. análise exploratória dos arquivos CSV no Python, utilizando estatísticas descritivas e visualizações.
 
 ## Perguntas de análise
 
 O projeto busca responder principalmente às seguintes perguntas:
 
-1. Como os salários estão distribuídos entre os departamentos e cargos?
-2. Como os funcionários e seus salários estão distribuídos geograficamente?
-3. Existem salários muito diferentes do padrão observado em cada grupo?
-4. Quais departamentos, cargos ou regiões apresentam os maiores e menores salários?
+1. Como os salários estão distribuídos entre departamentos e cargos?
+2. Quais departamentos e cargos apresentam maiores médias salariais?
+3. Como os funcionários e seus salários estão distribuídos geograficamente?
+4. Existem salários muito diferentes do padrão observado na base?
+5. Os possíveis outliers salariais representam inconsistências ou diferenças explicáveis por cargo/departamento?
 
 ## Fonte dos dados
 
-Será utilizado o esquema **HR** disponibilizado no [FreeSQL](https://freesql.com/). As principais tabelas previstas são:
+Os dados foram extraídos do esquema **HR** disponibilizado no [FreeSQL](https://freesql.com/).
+
+As principais tabelas utilizadas foram:
 
 | Tabela | Conteúdo principal |
 | --- | --- |
-| `EMPLOYEES` | Funcionários, cargos, salários e departamentos |
+| `EMPLOYEES` | Funcionários, cargos, salários, datas de contratação e departamentos |
 | `DEPARTMENTS` | Identificação e nome dos departamentos |
 | `JOBS` | Cargos e respectivas faixas salariais |
 | `LOCATIONS` | Cidades, estados ou províncias e países |
 | `COUNTRIES` | Países e suas regiões |
 | `REGIONS` | Identificação e nome das regiões |
 
-## Consultas SQL planejadas
+## Consultas SQL
 
-### Query 1 - Salário por departamento e cargo
+Foram criadas duas consultas SQL conforme as orientações do projeto.
 
-A primeira consulta relacionará `EMPLOYEES`, `DEPARTMENTS` e `JOBS` utilizando `LEFT JOIN`. O objetivo será reunir os dados necessários para comparar salários entre departamentos e cargos.
+### Query 1 - Funcionários, salários, departamentos e cargos
 
-O resultado será exportado para `query_01.csv`.
+A primeira consulta relaciona as tabelas `EMPLOYEES`, `DEPARTMENTS` e `JOBS` por meio de `LEFT JOIN`.
 
-### Query 2 - Funcionários por região
+O objetivo dessa query é reunir informações dos funcionários, seus salários, departamentos e cargos, permitindo analisar a distribuição salarial por área e função.
 
-A segunda consulta relacionará `EMPLOYEES`, `DEPARTMENTS`, `LOCATIONS`, `COUNTRIES` e `REGIONS` utilizando `LEFT JOIN`. O objetivo será analisar a distribuição dos funcionários e salários por cidade, estado ou província, país e região.
+Arquivo SQL:
 
-O resultado será exportado para `query_02.csv`.
+```text
+sql/query_01.sql
+```
+
+Arquivo exportado:
+
+```text
+data/query_01.csv
+```
+
+### Query 2 - Funcionários, salários e distribuição geográfica
+
+A segunda consulta relaciona as tabelas `EMPLOYEES`, `DEPARTMENTS`, `LOCATIONS`, `COUNTRIES` e `REGIONS` por meio de `LEFT JOIN`.
+
+O objetivo dessa query é analisar os funcionários, seus salários e sua distribuição por cidade, país e região.
+
+Arquivo SQL:
+
+```text
+sql/query_02.sql
+```
+
+Arquivo exportado:
+
+```text
+data/query_02.csv
+```
 
 ## Análise em Python
 
-Os arquivos CSV serão importados no Python para uma Análise Exploratória de Dados (EDA). Estão previstas as seguintes etapas:
+A análise exploratória foi desenvolvida no notebook:
 
-- verificação da estrutura e da qualidade dos dados;
-- identificação de valores ausentes e registros duplicados;
-- cálculo de média, mediana, valor mínimo e valor máximo;
-- comparação dos salários por departamento, cargo e região;
-- identificação e interpretação de possíveis outliers;
-- criação de histogramas e/ou boxplots.
+```text
+notebooks/analise_rh.ipynb
+```
 
-Os principais resultados e insights serão incluídos neste README após a conclusão das análises.
+As principais etapas realizadas foram:
 
-## Estrutura planejada do projeto
+- importação dos arquivos CSV gerados no FreeSQL;
+- verificação inicial da estrutura dos dados;
+- análise de valores ausentes e registros duplicados;
+- conversão de tipos de dados, incluindo datas e colunas de identificação;
+- cálculo de estatísticas descritivas da coluna de salários;
+- análise salarial por departamento;
+- análise salarial por cargo;
+- análise salarial por região, país e cidade;
+- criação de visualizações com histogramas, gráficos de barras e boxplots;
+- identificação e interpretação de possíveis outliers salariais.
+
+## Resultados e insights
+
+A análise exploratória permitiu identificar alguns padrões relevantes na base de Recursos Humanos.
+
+Entre os principais resultados observados, destacam-se:
+
+- a distribuição salarial apresenta concentração em faixas menores, com poucos funcionários recebendo salários mais elevados;
+- existem diferenças salariais relevantes entre departamentos e cargos;
+- cargos com maior responsabilidade tendem a apresentar médias salariais mais altas;
+- a análise geográfica permite observar a distribuição de funcionários e salários entre regiões, países e cidades;
+- foi identificado um outlier na análise geral dos salários;
+- ao segmentar a análise por departamento, também foram identificados outliers específicos em algumas áreas;
+- o departamento `Shipping` apresentou o maior número de outliers na análise por departamento;
+- no departamento `Shipping`, os outliers estão associados principalmente a diferenças de cargo;
+- funcionários com o cargo `Stock Manager` apresentam salários mais elevados dentro do departamento `Shipping`.
+
+Esses resultados indicam que os outliers encontrados não devem ser interpretados automaticamente como erros na base. No caso analisado, eles parecem estar relacionados a diferenças reais de cargo, responsabilidade e estrutura salarial.
+
+## Estrutura do projeto
 
 ```text
 Projeto_Final_Modulo_01_SCTEC/
@@ -73,21 +131,18 @@ Projeto_Final_Modulo_01_SCTEC/
 │   ├── query_01.csv
 │   └── query_02.csv
 ├── notebooks/
-│   └── notebook_queries.ipynb
-|   └── analise_rh.py
+│   └── analise_rh.ipynb
 ├── sql/
-│   └── queries.sql
-├── images/
-│   └── graficos_do_projeto.png
+│   ├── query_01.sql
+│   └── query_02.sql
 ├── README.md
 └── requirements.txt
 ```
 
-> Os diretórios e arquivos serão adicionados conforme o desenvolvimento do projeto.
+## Tecnologias utilizadas
 
-## Tecnologias previstas
-
-- SQL e FreeSQL;
+- SQL;
+- FreeSQL;
 - Python;
 - Pandas;
 - Matplotlib;
@@ -95,39 +150,59 @@ Projeto_Final_Modulo_01_SCTEC/
 - Jupyter Notebook;
 - Git e GitHub.
 
-## Como executar
+## Como executar o projeto
 
-As instruções completas serão atualizadas conforme o projeto avançar. Inicialmente, será necessário ter o Python instalado e instalar as dependências com:
+Para reproduzir a análise, siga os passos abaixo.
+
+1. Clone o repositório:
+
+```bash
+git clone <url-do-repositorio>
+```
+
+2. Acesse a pasta do projeto:
+
+```bash
+cd Projeto_Final_Modulo_01_SCTEC
+```
+
+3. Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Depois da inclusão dos arquivos de dados e scripts, esta seção apresentará o passo a passo completo para reproduzir as análises.
+4. Abra o notebook:
+
+```text
+notebooks/analise_rh.ipynb
+```
+
+5. Execute as células do notebook em ordem.
+
+Os arquivos CSV necessários para a análise já estão disponíveis na pasta `data/`.
 
 ## Acompanhamento do projeto
 
 - [x] Criar e conectar o repositório no GitHub
 - [x] Preparar a documentação inicial no README
-- [ ] Desenvolver a Query 1
-- [ ] Desenvolver a Query 2
-- [ ] Exportar os resultados para CSV
-- [ ] Importar e verificar os dados no Python
-- [ ] Realizar a análise exploratória
-- [ ] Calcular as estatísticas descritivas
-- [ ] Criar os gráficos
-- [ ] Registrar os resultados e insights no README
-- [ ] Revisar a organização e a reprodutibilidade do projeto
+- [x] Desenvolver a Query 1
+- [x] Desenvolver a Query 2
+- [x] Exportar os resultados para CSV
+- [x] Importar e verificar os dados no Python
+- [x] Realizar a análise exploratória
+- [x] Calcular as estatísticas descritivas
+- [x] Criar os gráficos
+- [x] Identificar e interpretar outliers
+- [x] Registrar os resultados e insights no README
+- [x] Revisar a organização e a reprodutibilidade do projeto
 - [ ] Gravar o vídeo de apresentação
 - [ ] Publicar e enviar os links no AVA
-
-## Resultados e insights
-
-Esta seção será preenchida após a execução das consultas e da análise exploratória.
 
 ## Possíveis melhorias futuras
 
 - ampliar as análises com novas variáveis do esquema HR;
 - criar visualizações interativas;
 - automatizar a extração e atualização dos dados;
-- desenvolver um dashboard para acompanhamento dos indicadores de RH.
+- desenvolver um dashboard para acompanhamento dos indicadores de RH;
+- comparar salários com as faixas mínimas e máximas previstas na tabela `JOBS`.
