@@ -157,7 +157,7 @@ Para reproduzir a análise, siga os passos abaixo.
 1. Clone o repositório:
 
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/samuelbucco/Projeto_Final_Modulo_01_SCTEC.git
 ```
 
 2. Acesse a pasta do projeto:
