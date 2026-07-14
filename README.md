@@ -8,7 +8,7 @@ Projeto avaliativo do Módulo 1 do curso de Análise de Dados do SCTEC, desenvol
 - **Turma:** T2
 - **Módulo:** Módulo 1 - Modelagem de Dados
 - **Tema:** Visualização de Dados e Business Intelligence
-- **Status:** Em desenvolvimento
+- **Status:** Finalizado
 
 ## Objetivo
 
@@ -196,8 +196,8 @@ Os arquivos CSV necessários para a análise já estão disponíveis na pasta `d
 - [x] Identificar e interpretar outliers
 - [x] Registrar os resultados e insights no README
 - [x] Revisar a organização e a reprodutibilidade do projeto
-- [ ] Gravar o vídeo de apresentação
-- [ ] Publicar e enviar os links no AVA
+- [x] Gravar o vídeo de apresentação
+- [x] Publicar e enviar os links no AVA
 
 ## Possíveis melhorias futuras
 
@@ -206,3 +206,9 @@ Os arquivos CSV necessários para a análise já estão disponíveis na pasta `d
 - automatizar a extração e atualização dos dados;
 - desenvolver um dashboard para acompanhamento dos indicadores de RH;
 - comparar salários com as faixas mínimas e máximas previstas na tabela `JOBS`.
+
+## LINKS
+
+- Repositório: https://github.com/samuelbucco/Projeto_Final_Modulo_01_SCTEC.git
+- Vídeo: https://www.loom.com/share/c66fbd1653f547d58dd7af62311ef1f5
+
